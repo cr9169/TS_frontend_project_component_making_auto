@@ -1,0 +1,1 @@
+# TS_frontend_project_component_making_auto
