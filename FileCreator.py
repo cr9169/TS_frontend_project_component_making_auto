@@ -18,9 +18,7 @@ class FileCreator:
     def create_jsx_file(self, component_name):
         with open(f"{component_name}.jsx", "w") as file:
             file.write(self.adapt_component_base_template(component_name)) 
-            print(f"{component_name}.jsx created successfully.")
 
     def create_scss_file(self, component_name):
         with open(f"{component_name}.scss", "w") as file:
             file.write("")
-            print(f"{component_name}.scss created successfully.") 
