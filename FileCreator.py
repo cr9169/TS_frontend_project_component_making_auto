@@ -11,7 +11,7 @@ class FileCreator:
     def set_components_files_names(self, new_names):
         self.components_files_names = new_names
 
-    def adapt_component_base_template(component_name):
+    def adapt_component_base_template(self, component_name):
         adapted_component_base_template = FileCreator.component_base_template.replace("X", component_name)
         return adapted_component_base_template
 
@@ -20,8 +20,7 @@ class FileCreator:
             file.write(self.adapt_component_base_template(component_name)) 
             print(f"{component_name}.jsx created successfully.")
 
-    def create_scss_file(component_name):
-        with open(f"{component_name}.scss", "r"):
-            with open(f"{component_name}.scss", "w") as file:
-                file.write("")
-                print(f"{component_name}.scss created successfully.") 
+    def create_scss_file(self, component_name):
+        with open(f"{component_name}.scss", "w") as file:
+            file.write("")
+            print(f"{component_name}.scss created successfully.") 

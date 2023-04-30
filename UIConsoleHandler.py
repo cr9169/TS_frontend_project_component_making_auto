@@ -1,18 +1,19 @@
 from FileCreator import FileCreator
 from Errors import *
 import re
+import os
 
 class UIConsoleHandler:
 
     component_name_choosing_output = "type your component name:"
 
-    def __init__(self, components_names, depth, fileCreator):
+    def __init__(self, components_names=[], depth=0):
         # will get set after the user is done giving components names (input)
-        self.components_names = []
+        self.components_names = components_names
         # will get set to 1 or 2
-        self.depth = 0 
+        self.depth = depth
         # will get set after the user is done giving components names (input)
-        self.fileCreator = FileCreator(components_names)
+        self.file_creator = FileCreator(components_names)
 
     def get_components_names(self):
         return self.components_names
@@ -27,10 +28,10 @@ class UIConsoleHandler:
         self.depth = new_depth
 
     # Checks if a string is in Pascal case formatting and do not contain digits or whitespace
-    def validate_user_input(user_input):
+    def validate_user_input(self, user_input):
         return bool(re.match('^[A-Z][a-z]*([A-Z][a-z]*)*$', user_input)) and not re.search('[\d\s]', user_input)
 
-    def get_user_input(self):
+    def console_handling(self):
 
         print("Type component depth (1 / 2):")
         depth = input()
@@ -38,7 +39,7 @@ class UIConsoleHandler:
         if depth is None:
             raise NoneError("Depth can't be an empty string!")
         
-        elif depth == 1: 
+        elif depth == "1": 
             print(UIConsoleHandler.component_name_choosing_output)
             component_name = input()
             if not self.validate_user_input(component_name):
@@ -54,11 +55,11 @@ class UIConsoleHandler:
                 
                 # Create JSX and SCSS files in folder
                 os.chdir(component_name)
-                self.create_jsx_file(component_name)
-                self.create_scss_file(component_name)
+                self.file_creator.create_jsx_file(component_name)
+                self.file_creator.create_scss_file(component_name)
                 os.chdir("..")
 
-        elif depth == 2:
+        elif depth == "2":
             return 
             # // change to mixed functionality with depth 1 and 2, loop, and file creating (has record in whatsapp)
 
