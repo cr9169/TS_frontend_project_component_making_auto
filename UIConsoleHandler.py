@@ -77,8 +77,6 @@ class UIConsoleHandler:
                 choice = input("Do you want to enter another string? (y / n) \n")
                 if choice.lower() != 'y':
                     break
-            
-            # print(self.components_names)
 
             for component_name in self.components_names:
                 self.create_component_folder(component_name)
