@@ -18,7 +18,7 @@ class UIConsoleHandler:
         return self.components_names
     
     def set_components_names(self, new_names):
-        self.components_names = new_names
+        self.components_names += new_names
     
     def get_depth(self):
         return self.depth
@@ -44,8 +44,19 @@ class UIConsoleHandler:
             if not self.validate_user_input(component_name):
                 raise ValueError("User input isn't valid!")
             else:
-                self.components_names.append(component_name)
-            # // continue with folder and files creating
+                self.set_components_names([component_name])
+                # Create folder if it doesn't exist
+                if not os.path.exists(component_name):
+                    os.makedirs(component_name)
+                    print(f"Folder '{component_name}' created successfully.")
+                else:
+                    print(f"Folder '{component_name}' already exists.")
+                
+                # Create JSX and SCSS files in folder
+                os.chdir(component_name)
+                self.create_jsx_file(component_name)
+                self.create_scss_file(component_name)
+                os.chdir("..")
 
         elif depth == 2:
             return 
@@ -53,7 +64,3 @@ class UIConsoleHandler:
 
         else: 
             raise ValueError("Depth has to be 1 or 2!")
-
-
-    def console_handling():
-        return
